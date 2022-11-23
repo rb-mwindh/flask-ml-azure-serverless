@@ -5,16 +5,77 @@ Deploy Flask Machine Learning Application on Azure App Services
 
 ## To run it locally follow these steps
 
-1.  Create virtual environment and source
+**Requirement:** run on Python3.6
+
+```
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+$ sudo apt update
+$ sudo apt install python3.6-dev python3.6-venv
+```
+
+
+1.  ~~Create virtual environment and source~~
 
 ```bash
-python3 -m venv ~/.flask-ml-azure
+/usr/bin/python3.6 -m venv ~/.flask-ml-azure
 source ~/.flask-ml-azure/bin/activate
 ```
 
-2.  Run `make install`
+2.  ~~Run `make install`~~
 
-3.  Run `python app.py`
+3.  ~~Run `python app.py`~~
+
+As a newby, I struggled with `Makefile` so much that I started googling "I hate makefile so, so much!" ;)
+
+Instead, I implemented a shell script that performs all required tasks to get started with python3.6
+
+Just run
+```
+$ ./setup.sh
+
+/usr/bin/python3.6
+Requirement already satisfied: pip in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (21.3.1)
+WARNING: You are using pip version 21.3.1; however, version 22.3.1 is available.
+You should consider upgrading via the '/home/testuser/.flask-ml-azure/bin/python3.6 -m pip install --upgrade pip' command.
+Requirement already satisfied: Flask==1.0.2 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from -r requirements.txt (line 1)) (1.0.2)
+Requirement already satisfied: pandas==1.1.5 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from -r requirements.txt (line 2)) (1.1.5)
+Requirement already satisfied: scikit-learn==0.20.3 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from -r requirements.txt (line 3)) (0.20.3)
+Requirement already satisfied: pylint==2.6.2 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from -r requirements.txt (line 4)) (2.6.2)
+Requirement already satisfied: click>=5.1 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from Flask==1.0.2->-r requirements.txt (line 1)) (8.0.4)
+Requirement already satisfied: Jinja2>=2.10 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from Flask==1.0.2->-r requirements.txt (line 1)) (3.0.3)
+Requirement already satisfied: itsdangerous>=0.24 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from Flask==1.0.2->-r requirements.txt (line 1)) (2.0.1)
+Requirement already satisfied: Werkzeug>=0.14 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from Flask==1.0.2->-r requirements.txt (line 1)) (2.0.3)
+Requirement already satisfied: pytz>=2017.2 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from pandas==1.1.5->-r requirements.txt (line 2)) (2022.6)
+Requirement already satisfied: python-dateutil>=2.7.3 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from pandas==1.1.5->-r requirements.txt (line 2)) (2.8.2)
+Requirement already satisfied: numpy>=1.15.4 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from pandas==1.1.5->-r requirements.txt (line 2)) (1.19.5)
+Requirement already satisfied: scipy>=0.13.3 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from scikit-learn==0.20.3->-r requirements.txt (line 3)) (1.5.4)
+Requirement already satisfied: toml>=0.7.1 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from pylint==2.6.2->-r requirements.txt (line 4)) (0.10.2)
+Requirement already satisfied: astroid<2.5,>=2.4.0 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from pylint==2.6.2->-r requirements.txt (line 4)) (2.4.2)
+Requirement already satisfied: mccabe<0.7,>=0.6 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from pylint==2.6.2->-r requirements.txt (line 4)) (0.6.1)
+Requirement already satisfied: isort<6,>=4.2.5 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from pylint==2.6.2->-r requirements.txt (line 4)) (5.10.1)
+Requirement already satisfied: typed-ast<1.5,>=1.4.0 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from astroid<2.5,>=2.4.0->pylint==2.6.2->-r requirements.txt (line 4)) (1.4.3)
+Requirement already satisfied: wrapt~=1.11 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from astroid<2.5,>=2.4.0->pylint==2.6.2->-r requirements.txt (line 4)) (1.14.1)
+Requirement already satisfied: six~=1.12 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from astroid<2.5,>=2.4.0->pylint==2.6.2->-r requirements.txt (line 4)) (1.16.0)
+Requirement already satisfied: lazy-object-proxy==1.4.* in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from astroid<2.5,>=2.4.0->pylint==2.6.2->-r requirements.txt (line 4)) (1.4.3)
+Requirement already satisfied: importlib-metadata in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from click>=5.1->Flask==1.0.2->-r requirements.txt (line 1)) (4.8.3)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from Jinja2>=2.10->Flask==1.0.2->-r requirements.txt (line 1)) (2.0.1)
+Requirement already satisfied: dataclasses in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from Werkzeug>=0.14->Flask==1.0.2->-r requirements.txt (line 1)) (0.8)
+Requirement already satisfied: zipp>=0.5 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from importlib-metadata->click>=5.1->Flask==1.0.2->-r requirements.txt (line 1)) (3.6.0)
+Requirement already satisfied: typing-extensions>=3.6.4 in /home/testuser/.flask-ml-azure/lib/python3.6/site-packages (from importlib-metadata->click>=5.1->Flask==1.0.2->-r requirements.txt (line 1)) (4.1.1)
+WARNING: You are using pip version 21.3.1; however, version 22.3.1 is available.
+You should consider upgrading via the '/home/testuser/.flask-ml-azure/bin/python3.6 -m pip install --upgrade pip' command.
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://192.168.67.3:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-456-789
+```
 
 4.  In a separate shell run: `./make_prediction.sh`
 
